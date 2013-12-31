@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<head>
+  <meta name="description" content="" />
+  <meta name="keywords" content="" />
+  <meta name="author" content="Mashhood Rastgar" />
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>Horizontal Slider</title>
+  <!-- Scripts to handle HTML5 tags on IE -->
+    <!--[if lt IE 9]>
+      <script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js"></script>
+      <![endif]-->
+    <!--[if IE]>
+      <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+      <![endif]-->
+      <script type="text/javascript" src="libs/jquery.js"></script>
+      <script type="text/javascript" src="libs/bootstrap/js/bootstrap.min.js"></script>
+      <link rel="stylesheet" media="screen" href='libs/bootstrap/css/bootstrap.min.css' type="text/css" />
+      <link rel="stylesheet" media="screen" href='libs/bootstrap/css/bootstrap-theme.min.css' type="text/css" />
+      <link rel="stylesheet" media="screen" href='css/style.css' type="text/css" />
+    </head>
+    <body>
+      <div class="h-slider col-lg-8">
+        <div class="row">
+          <div class="col-lg-3 col-md-3 col-sm-12 slides">
+            <h4>Sections</h4>
+            <select class="visible-sm visible-xs form-control h-slider-nav-select"></select>
+            <ul class="hidden-sm hidden-xs h-slider-nav-list"></ul>
+          </div>
+          <div id="sample-carousel" class="col-lg-9 col-md-9 col-sm-12 carousel slide">
+            <!--Wrapper for slides -->
+            <div class="carousel-inner">
+              <div class="item active">
+                <h3 data-group="Step 1">Enter your household information</h3>
+                <div class="row">
+                  <div class="col-md-6">
+                    <label>Field name:</label>
+                    <input type="text" class="form-control">
+                    <label>Field name:</label>
+                    <input type="text" class="form-control">
+                    <label>Field name:</label>
+                    <input type="text" class="form-control">
+                    <label>Field name:</label>
+                    <input type="text" class="form-control">
+                    <label>Field name:</label>
+                    <input type="text" class="form-control">
+                    <label>Field name:</label>
+                    <input type="text" class="form-control">
+                    <label>Field name:</label>
+                    <input type="text" class="form-control">
+                    <label>Field name:</label>
+                    <input type="text" class="form-control">
+                    <label>Field name:</label>
+                    <input type="text" class="form-control">
+                    <label>Field name:</label>
+                    <input type="text" class="form-control">
+                    <label>Field name:</label>
+                    <input type="text" class="form-control">
+                  </div>
+                  <div class="col-md-6">
+                    <label>Field name:</label>
+                    <input type="text" class="form-control">
+                    <label>Field name:</label>
+                    <input type="text" class="form-control">
+                    <label>Field name:</label>
+                    <input type="text" class="form-control">
+                    <label>Field name:</label>
+                    <input type="text" class="form-control">
+                    <label>Field name:</label>
+                    <input type="text" class="form-control">
+                    <label>Field name:</label>
+                    <input type="text" class="form-control">
+                    <label>Field name:</label>
+                    <input type="text" class="form-control">
+                    <label>Field name:</label>
+                    <input type="text" class="form-control">
+                    <label>Field name:</label>
+                    <input type="text" class="form-control">
+                  </div>
+                </div>
+              </div>
+
+              <div class="item">
+                <h3 data-group="Step 1">Size Criteria. Benefit Cap, Non-dependants (optional)</h3>
+                <div class="row">
+                  <div class="col-md-6">
+                    <label>Field name:</label>
+                    <input type="text" class="form-control">
+                    <label>Field name:</label>
+                    <input type="text" class="form-control">
+                    <label>Field name:</label>
+                    <input type="text" class="form-control">
+                    <label>Field name:</label>
+                    <input type="text" class="form-control">
+                  </div>
+                </div>
+              </div>
+
+              <div class="item">
+                <h3 data-group="Step 1">Local Support Schemes</h3>
+                <div class="row">
+                  <div class="col-md-6">
+                    <label>Field name:</label>
+                    <input type="text" class="form-control">
+                    <label>Field name:</label>
+                    <input type="text" class="form-control">
+                    <label>Field name:</label>
+                    <input type="text" class="form-control">
+                    <label>Field name:</label>
+                    <input type="text" class="form-control">
+                  </div>
+                </div>
+              </div>
+
+              <div class="item">
+                <h3 data-group="Step 2">Adult and Child disability (DLA/PIP)</h3>
+                <div class="row">
+                  <div class="col-md-6">
+                    <label>Field name:</label>
+                    <input type="text" class="form-control">
+                    <label>Field name:</label>
+                    <input type="text" class="form-control">
+                    <label>Field name:</label>
+                    <input type="text" class="form-control">
+                    <label>Field name:</label>
+                    <input type="text" class="form-control">
+                  </div>
+                </div>
+              </div>
+
+              <div class="item">
+                <h3 data-group="Step 2">Savings and other income</h3>
+                <div class="row">
+                  <div class="col-md-6">
+                    <label>Field name:</label>
+                    <input type="text" class="form-control">
+                    <label>Field name:</label>
+                    <input type="text" class="form-control">
+                    <label>Field name:</label>
+                    <input type="text" class="form-control">
+                    <label>Field name:</label>
+                    <input type="text" class="form-control">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="control-group">
+              <div class="row">
+                <div class="col-sm-3" id="previous-button">
+                  <a class="btn btn-info btn-block" href="#sample-carousel" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                  </a>
+                </div>
+                <div class="col-sm-9" id="next-button">
+                  <a class="btn btn-success btn-block"  href="#sample-carousel" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <script type="text/javascript">
+        var carousel = $('.carousel').carousel('pause');
+
+        var updateNav = function() {
+          var nextButton = $('#next-button');
+          var previousButton = $('#previous-button');
+          // to hide or show the next previous buttons
+          if($('.item.active').next().length <= 0) {
+            nextButton.hide();
+            previousButton.removeClass('col-sm-3');
+            previousButton.addClass('col-sm-12');
+          } else {
+            nextButton.show();
+            previousButton.addClass('col-sm-3');
+            previousButton.removeClass('col-sm-12');
+          }
+
+          if($('.item.active').prev().length <= 0) {
+            previousButton.hide();
+            nextButton.removeClass('col-sm-9');
+            nextButton.addClass('col-sm-12');
+          } else {
+            previousButton.show();
+            nextButton.addClass('col-sm-9');
+            nextButton.removeClass('col-sm-12');
+          }
+
+          var titleOfActive = $('.carousel .item.active').find("h3").first().text();
+          $('.h-slider-nav-select option').each(function() {
+            if($(this).text() == titleOfActive) {
+              $(this).attr("selected","selected");
+            } else {
+              $(this).removeAttr("selected");
+            }
+          });
+
+          $('.h-slider-nav-list li').each(function() {
+            if($(this).text() == titleOfActive) {
+              $(this).addClass("active");
+            } else {
+              $(this).removeClass("active");
+            }
+          });
+         };
+
+        $('.carousel .item').each(function() {
+          var title = $(this).find("h3").first().text();
+          $('.h-slider-nav-select').append("<option>"+ title +"</option>");
+          $('.h-slider-nav-list').append("<li><a href='#'>"+ title +"</a></li>");
+        });
+
+        $('.h-slider-nav-list a').click(function() {
+          $('.carousel').carousel($(this).parent().index());
+        });
+
+        $('.h-slider-nav-select').change(function() {
+          $('.carousel').carousel($(this)[0].selectedIndex);
+        });
+
+        carousel.on('slid.bs.carousel', updateNav);
+        updateNav();
+      </script>
+
+    </body>
+    </html>
