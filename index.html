@@ -22,7 +22,6 @@
       <div class="h-slider col-lg-8">
         <div class="row">
           <div class="col-lg-3 col-md-3 col-sm-12 slides">
-            <h4>Sections</h4>
             <select class="visible-sm visible-xs form-control h-slider-nav-select"></select>
             <ul class="hidden-sm hidden-xs h-slider-nav-list"></ul>
           </div>
@@ -30,7 +29,7 @@
             <!--Wrapper for slides -->
             <div class="carousel-inner">
               <div class="item active">
-                <h3 data-group="Step 1">Enter your household information</h3>
+                <h3 data-group="Gathering Information">Household information</h3>
                 <div class="row">
                   <div class="col-md-6">
                     <label>Field name:</label>
@@ -80,7 +79,7 @@
               </div>
 
               <div class="item">
-                <h3 data-group="Step 1">Size Criteria. Benefit Cap, Non-dependants (optional)</h3>
+                <h3 data-group="Gathering Information">Size Criteria. Benefit Cap, Non-dependants (optional)</h3>
                 <div class="row">
                   <div class="col-md-6">
                     <label>Field name:</label>
@@ -96,7 +95,7 @@
               </div>
 
               <div class="item">
-                <h3 data-group="Step 1">Local Support Schemes</h3>
+                <h3 data-group="Gathering Information">Local Support Schemes</h3>
                 <div class="row">
                   <div class="col-md-6">
                     <label>Field name:</label>
@@ -112,7 +111,7 @@
               </div>
 
               <div class="item">
-                <h3 data-group="Step 2">Adult and Child disability (DLA/PIP)</h3>
+                <h3 data-group="Gathering Information">Adult and Child disability (DLA/PIP)</h3>
                 <div class="row">
                   <div class="col-md-6">
                     <label>Field name:</label>
@@ -128,7 +127,24 @@
               </div>
 
               <div class="item">
-                <h3 data-group="Step 2">Savings and other income</h3>
+                <h3 data-group="Gathering Information">Savings and other income</h3>
+                <div class="row">
+                  <div class="col-md-6">
+                    <label>Field name:</label>
+                    <input type="text" class="form-control">
+                    <label>Field name:</label>
+                    <input type="text" class="form-control">
+                    <label>Field name:</label>
+                    <input type="text" class="form-control">
+                    <label>Field name:</label>
+                    <input type="text" class="form-control">
+                  </div>
+                </div>
+              </div>
+
+
+            <div class="item">
+                <h3 data-group="Entitlements">Current Benefit System</h3>
                 <div class="row">
                   <div class="col-md-6">
                     <label>Field name:</label>
@@ -163,6 +179,45 @@
       </div>
       <script type="text/javascript">
         var carousel = $('.carousel').carousel('pause');
+
+        var init = function() {
+          var dataset = {};
+          $('.carousel .item').each(function() {
+            var h3 = $(this).find("h3");
+            var title = h3.first().text();
+            var group = "";
+            if(typeof h3.attr('data-group') !== "undefined") {
+              group = h3.attr('data-group');
+            }
+            if(typeof dataset[group] === "undefined")
+              dataset[group] = [];
+
+            dataset[group].push(title);
+          });
+
+          for(var key in dataset) {
+            $('.h-slider-nav-list').append("<li><h4>"+ key +"</h4></li>");
+            $('.h-slider-nav-select').append("<optgroup label='"+ key +"'>");
+            for(var stepKey in dataset[key]) {
+              $('.h-slider-nav-select').append("<option>"+ dataset[key][stepKey] +"</option>");
+              $('.h-slider-nav-list').append("<li><a href='#'>"+ dataset[key][stepKey] +"</a></li>");
+            }
+            $('.h-slider-nav-select').append("</optgroup>");
+          }
+
+          $('.h-slider-nav-list a').click(function() {
+            var linkText = $(this).text();
+            $('.h-slider .item').each(function(elIndex, el) {
+                if($(el).find('h3').first().text() == linkText) {
+                  $('.carousel').carousel(elIndex);
+                }
+            });
+          });
+
+          $('.h-slider-nav-select').change(function() {
+            $('.carousel').carousel($(this)[0].selectedIndex);
+          });
+        };
 
         var updateNav = function() {
           var nextButton = $('#next-button');
@@ -206,21 +261,9 @@
           });
          };
 
-        $('.carousel .item').each(function() {
-          var title = $(this).find("h3").first().text();
-          $('.h-slider-nav-select').append("<option>"+ title +"</option>");
-          $('.h-slider-nav-list').append("<li><a href='#'>"+ title +"</a></li>");
-        });
-
-        $('.h-slider-nav-list a').click(function() {
-          $('.carousel').carousel($(this).parent().index());
-        });
-
-        $('.h-slider-nav-select').change(function() {
-          $('.carousel').carousel($(this)[0].selectedIndex);
-        });
 
         carousel.on('slid.bs.carousel', updateNav);
+        init();
         updateNav();
       </script>
 
