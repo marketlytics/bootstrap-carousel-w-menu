@@ -1,8 +1,22 @@
+/**
+ *  A simple plugin based on top of bootstrap's carousel, which converts it into a wizard which
+ *  autogenerates the navigation. You can also group your steps using the data-group attribute on
+ *  the h3 element. If you would like to show the h3 element within the content area, you can
+ *  adjust that in the CSS.
+ *
+ * @author Mashhood Rastgar
+ * @date 31/12/2013
+ *
+ */
+
 (function($) {
+
+
   $.fn.hSlider = function() {
     $el = $(this);
 
     var carousel = $el.carousel('pause');
+
     var init = function() {
       var dataset = {};
       $el.find('.item').each(function() {
@@ -17,6 +31,9 @@
 
         dataset[group].push(title);
       });
+
+      $('.h-slider-nav-list').html('');
+      $('.h-slider-nav-select').html('');
 
       for(var key in dataset) {
         $('.h-slider-nav-list').append("<li><h4>"+ key +"</h4></li>");
@@ -87,6 +104,24 @@
     carousel.on('slid.bs.carousel', updateNav);
     init();
     updateNav();
+
+    /* Code to dynamically add and remove certain slides */
+    var removeCache = {};
+    $el.find('[data-hideSlideNumber]').change(function() {
+      var itemNumber = parseInt($(this).attr('data-hideSlideNumber'), 10);
+      var itemToRemove = $($el.find('.item')[itemNumber]);
+      var title = itemToRemove.find('h3').first();
+      if(!$(this).is(':checked')) {
+        removeCache[title] = itemToRemove;
+        itemToRemove.remove();
+      } else {
+        var insertAfter = $el.find('.item')[itemNumber - 1];
+        $(removeCache[title]).insertAfter(insertAfter);
+      }
+      init();
+      updateNav();
+    });
+
     return this;
   };
 }(jQuery));
