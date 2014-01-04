@@ -230,7 +230,33 @@
       </div>
       <script type="text/javascript" src="js/jquery.h_slider.js"></script>
       <script>
-        $('.carousel').hSlider();
+        var updateButtons = function() {
+          var nextButton = $('#next-button');
+          var previousButton = $('#previous-button');
+          // to hide or show the next previous buttons
+          if($('.item.active').next().length <= 0) {
+            nextButton.hide();
+            previousButton.removeClass('col-sm-3');
+            previousButton.addClass('col-sm-12');
+          } else {
+            nextButton.show();
+            previousButton.addClass('col-sm-3');
+            previousButton.removeClass('col-sm-12');
+          }
+
+          if($('.item.active').prev().length <= 0) {
+            previousButton.hide();
+            nextButton.removeClass('col-sm-9');
+            nextButton.addClass('col-sm-12');
+          } else {
+            previousButton.show();
+            nextButton.addClass('col-sm-9');
+            nextButton.removeClass('col-sm-12');
+          }
+        };
+        var slider = $('.carousel').hSlider();
+        slider.on('slid.bs.carousel', updateButtons);
+        updateButtons();
       </script>
     </body>
     </html>

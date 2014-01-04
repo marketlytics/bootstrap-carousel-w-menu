@@ -145,7 +145,6 @@
 
             ul.find('a').click(function() {
                 var slideToSwitch = $(this).parent().attr(_this.activeSlideAttr);
-                console.log(slideToSwitch);
                 _this.$el.carousel(parseInt(slideToSwitch,10));
                 return false;
             });
