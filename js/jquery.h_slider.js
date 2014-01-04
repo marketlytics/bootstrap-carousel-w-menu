@@ -41,6 +41,7 @@
         this.navSelectClass = "h-slider-nav-select";
         this.navUlClass = "h-slider-nav-list";
         this.activeSlideAttr = "data-slide-number";
+        this.hideSlideAttr = "data-hide-slide-number"
 
         this.init();
     }
@@ -177,6 +178,31 @@
              });
         },
 
+        toggleSlide : function(disabled, number) {
+            var dataset = this.struct;
+            var _this = this;
+            for(var key in dataset) {
+                for(var slideKey in dataset[key]) {
+                    var slide = dataset[key][slideKey];
+                    if(slide.position == number) {
+                        slide.disabled = disabled;
+                        if(!disabled) {
+                            slide.content.insertAfter(
+                                this.$el.find('[' + this.activeSlideAttr + '="' + (number - 1) +'"]')
+                            );
+                        } else {
+                            this.$el.find('.item').each(function() {
+                                if($(this).attr(_this.activeSlideAttr) == number) {
+                                    $(this).remove();
+                                    return;
+                                }
+                            });
+                        }
+                    }
+                }
+            }
+        },
+
         init : function() {
             var _this = this;
             this.$el.carousel(this.options);
@@ -185,7 +211,20 @@
             this.createMenu();
             this.paintMenu();
 
+            // repaint every time the carousel slides
             this.$el.on('slid.bs.carousel', function() {
+                _this.paintMenu();
+            });
+
+            // disable enable slides when the checkbox is checked
+            this.$el.find('[' + this.hideSlideAttr + ']').change(function() {
+                var slideNumber = $(this).attr(_this.hideSlideAttr);
+                if($(this).is(":checked"))
+                    _this.toggleSlide(false, slideNumber);
+                else
+                    _this.toggleSlide(true, slideNumber);
+
+                _this.createMenu();
                 _this.paintMenu();
             });
         }
