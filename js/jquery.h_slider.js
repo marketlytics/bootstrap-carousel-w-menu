@@ -171,9 +171,14 @@
                 }
             });
 
+            this.navUl().find('ul').each(function() {
+                $(this).hide();
+            });
+
             this.navUl().find('li').each(function() {
                 if($(this).attr(_this.activeSlideAttr) == activeSlideNumber) {
                   $(this).addClass("active");
+                  $(this).parent().show();
                 } else {
                   $(this).removeClass("active");
                 }
