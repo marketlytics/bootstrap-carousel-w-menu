@@ -25,12 +25,8 @@ body {
   .item {
     overflow-x: hidden;
     overflow-y: scroll;
+    padding: 20px 0;
     height: 500px;
-  }
-
-  .item h3 {
-    visibility: hidden;
-    margin: 0;
   }
 
 .slides {
