@@ -133,12 +133,14 @@
             var dataset = this.struct;
             for(var key in dataset) {
                 ul.append("<li><h4>"+ key +"</h4></li>");
+                var subUl = $("<ul></ul>");
+                ul.append(subUl);
                 select.append("<optgroup label='"+ key +"'>");
                 for(var stepObj in dataset[key]) {
                     var slide = dataset[key][stepObj];
                     if(!slide.disabled) {
                         select.append("<option " + this.activeSlideAttr + "=\"" + slide.position + "\">"+ slide.title +"</option>");
-                        ul.append("<li " + this.activeSlideAttr + "=\"" + slide.position + "\"><a href='#'>"+ slide.title +"</a></li>");
+                        subUl.append("<li " + this.activeSlideAttr + "=\"" + slide.position + "\"><a href='#'>"+ slide.title +"</a></li>");
                     }
                 }
                 select.append("</optgroup>");
