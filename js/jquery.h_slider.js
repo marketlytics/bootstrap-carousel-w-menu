@@ -159,7 +159,8 @@
 
         paintMenu : function() {
             // adds the active classes
-            var activeSlide = this.$el.find('.item.active');
+            var activeSlide = this.$el.find('.item.active').first();
+            activeSlide.scrollTop(0);
             var activeSlideNumber = activeSlide.attr(this.activeSlideAttr);
             var _this = this;
 
