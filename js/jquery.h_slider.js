@@ -41,7 +41,7 @@
         this.navSelectClass = "h-slider-nav-select";
         this.navUlClass = "h-slider-nav-list";
         this.activeSlideAttr = "data-slide-number";
-        this.hideSlideAttr = "data-hide-slide-number"
+        this.hideSlideAttr = "data-hide-slide-number";
 
         this.init();
     }
