@@ -36,20 +36,18 @@ You need to include the HSlider plugin files after jQuery and Bootstrap JS and c
 
 ```js
 
-$('carousel-example-generic').hSlider();
-
+$('#carousel-example-generic').hSlider();
 ```
 
 You can also pass in the options for the Bootstrap carousel:
 
 ```js
 
-$('carousel-example-generic').hSlider({
+$('#carousel-example-generic').hSlider({
   interval: false, // default
   pause: 'hover', // default,
   wrap: false //default
 });
-
 ```
 
 ## Modifications
@@ -76,7 +74,18 @@ You can also group certain titles using the **data-group** attribute, which is a
   </div>
 </div>
 ...
+```
 
+## Disabling certain slides
+
+A much needed feature in long forms / wizards is to dynamically control the slides so that you can disable some of them based on the data that has been given. This plugin allows us to remove and re-add selective slides.
+
+To implement this using checkboxes with a special attribute. When the checkbox is selected the slide is active, and when its clicked on and it becomes unchecked, the mentioned slide in the attribute gets removed from the menu and the carousel. Rechecking it adds it back to the caoursel and menu.
+
+Use the **data-hide-slide-number** attribute (where the slide number starts from 0 and is in the order as presented in the HTML). Since the slides are indexed on initiation, this number will not change if a slide before it is removed (obviously).
+
+```html
+<input type="checkbox" data-hide-slide-number="2" checked />
 ```
 
 
