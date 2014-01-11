@@ -153,6 +153,11 @@
                 return false;
             });
 
+            ul.find('h4').click(function() {
+                var subUl = $(this).parent().next();
+                subUl.slideToggle();
+            });
+
             select.change(function() {
                 _this.$el.carousel($(this)[0].selectedIndex);
             });
