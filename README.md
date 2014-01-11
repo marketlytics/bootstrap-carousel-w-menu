@@ -88,6 +88,14 @@ Use the **data-hide-slide-number** attribute (where the slide number starts from
 <input type="checkbox" data-hide-slide-number="2" checked />
 ```
 
+## TODO
+
+- Allow user to control the open and close groups
+- Disable selective slides on initialization (probably by using another attribute)
+- Allow user to disbale navigation through menu
+- Create an API for disabling slides, so the dependancy on the checkboxes isnt there
+- Extend the slid and slide APIs to include additional information
+
 
 
 
