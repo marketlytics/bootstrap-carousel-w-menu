@@ -26,7 +26,7 @@
         wrap: false
     };
 
-    function Plugin(element, options) {
+    function Plugin(element, options) {  //
         this.element = element;
 
         this.options = $.extend({}, defaults, options);
@@ -100,11 +100,18 @@
                     title: title,
                     disabled: false,
                     position: slideCount,
-                    content: item
+                    content: item,
+                    active:false
                 });
 
                 slideCount++;
             });
+
+            for(var heading in struct){
+                struct[heading][0]["active"] = true;
+                break;
+            }
+
 
             this.struct = struct;
         },
@@ -116,7 +123,7 @@
             this.wrapper = this.$el.parent();
             var inject = '' +
                 '<div class="col-lg-3 col-md-3 col-sm-12 slides">' +
-                '<select class="visible-sm visible-xs form-control ' + this.navSelectClass + '"></select>' +
+                '<select class="visible-sm visible-xs form-control ' + this.navSelectClass + '"></select>' + //
                 '<ul class="hidden-sm hidden-xs ' + this.navUlClass + '"></ul>' +
                 '</div>';
             this.wrapper.prepend(inject);
@@ -149,13 +156,26 @@
 
             ul.find('a').click(function() {
                 var slideToSwitch = $(this).parent().attr(_this.activeSlideAttr);
-                _this.$el.carousel(parseInt(slideToSwitch, 10));
-                return false;
+                var heading = $('li[data-slide-number = ' + slideToSwitch + "]").parent().prev().text();
+               _this.refreshActiveSlide(heading,_this.findSlideIndex(slideToSwitch));
+                return false;;
             });
 
             ul.find('h4').click(function() {
-                var subUl = $(this).parent().next();
-                subUl.slideToggle();
+                var heading = $(this).text();
+                _this.refreshActiveSlide(heading,0);
+            });
+
+            $('#previous-button').click(function(){
+                var slideToSwitch = _this.findActiveSlide().position - 1 ;
+                var heading = $('li[data-slide-number = ' + slideToSwitch + "]").parent().prev().text();
+                _this.refreshActiveSlide( heading, _this.findSlideIndex(slideToSwitch));
+            });
+
+           $('#next-button').click(function(){
+                var slideToSwitch = _this.findActiveSlide().position + 1 ;
+                var heading = $('li[data-slide-number = ' + slideToSwitch + "]").parent().prev().text();
+                _this.refreshActiveSlide( heading, _this.findSlideIndex(slideToSwitch));
             });
 
             select.change(function() {
@@ -165,9 +185,7 @@
 
         paintMenu: function() {
             // adds the active classes
-            var activeSlide = this.$el.find('.item.active').first();
-            activeSlide.scrollTop(0);
-            var activeSlideNumber = activeSlide.attr(this.activeSlideAttr);
+            var activeSlideNumber = (this.findActiveSlide()).position;
             var _this = this;
 
             this.navSelect().find('option').each(function() {
@@ -192,6 +210,35 @@
             });
         },
 
+        findSlideIndex : function(slidePosition){
+        for(var heading in this.struct){
+             for (var slideIndex in this.struct[heading]){
+                if (this.struct[heading][slideIndex].position == slidePosition){
+                    return slideIndex;
+                }
+            }
+        }
+
+        },
+
+        refreshActiveSlide : function(heading, slideIndex){
+            (this.findActiveSlide()).active= false;
+            this.struct[heading][slideIndex].active= true;
+            this.$el.carousel(parseInt(this.struct[heading][slideIndex].position, 10));
+        },
+
+        findActiveSlide: function() {
+            for(var heading in this.struct){
+                for (var slideIndex in this.struct[heading]){
+                    if (this.struct[heading][slideIndex].active == true){
+                        return this.struct[heading][slideIndex];
+                    }
+                }
+            }
+            return 0;
+
+        },
+
         toggleSlide: function(disabled, number) {
             var dataset = this.struct;
             var _this = this;
@@ -210,7 +257,7 @@
                                     $(this).remove();
                                     return;
                                 }
-                            });
+                            })
                         }
                     }
                 }
